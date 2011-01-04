@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "codemerger"
   s.version     = Codemerger::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Rodrigo Urubatan"]
+  s.email       = ["rodrigo@urubatan.com.br"]
+  s.homepage    = "http://www.urubatan.com.br"
+  s.summary     = %q{Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach}
+  s.description = %q{Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach}
 
   s.rubyforge_project = "codemerger"
 

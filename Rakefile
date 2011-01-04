@@ -1,2 +1,5 @@
 require 'bundler'
-Bundler::GemHelper.install_tasks
+task :fake do
+  
+end
+Bundler::GemHelper.install_tasks :name => 'codemerger'
