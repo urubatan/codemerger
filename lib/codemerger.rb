@@ -1,0 +1,3 @@
+module Codemerger
+  # Your code goes here...
+end
