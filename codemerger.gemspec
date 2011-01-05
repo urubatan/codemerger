@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach}
 
   s.rubyforge_project = "codemerger"
+  s.add_dependency 'maruku'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
