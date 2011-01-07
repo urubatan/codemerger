@@ -24,10 +24,11 @@ namespace "codemerger" do
         lang_str = case ext
                    when ".yml"; "lang=\"yaml\""
                    when ".xml"; "lang=\"xml\""
+                   when ".java"; "lang=\"java\""
                    when ".html"; "lang=\"xml\""
                    when ".rb"; "lang=\"ruby\""
                    when nil; "lang=\"ruby\""
-                   else; ""
+                   else; "lang=\"txt\""
                    end
 
         <<_EOF_

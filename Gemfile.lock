@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    codemerger (0.0.1)
+      maruku
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    maruku (0.6.0)
+      syntax (>= 1.0.0)
+    syntax (1.0.0)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  codemerger!
+  maruku
