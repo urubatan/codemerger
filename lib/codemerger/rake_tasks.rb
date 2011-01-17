@@ -19,6 +19,7 @@ namespace "codemerger" do
         when ".html"; "lang=\"xml\""
         when ".rb"; "lang=\"ruby\""
         when ".java"; "lang=\"java\""
+        when ".scala"; "lang=\"scala\""
         when ".erb"; "lang=\"ruby\""
         when ".xsl"; "lang=\"xml\""
         when ".css"; "lang=\"css\""
