@@ -9,7 +9,7 @@ namespace "codemerger" do
       in_lines = IO.readlines(file).to_s
       in_lines = Maruku.new(in_lines).to_html if file =~ /markdown$/
       out_fname = file[/^.*\./]
-      out_f    = File.new('output/#{out_fname}html', 'w')
+      out_f    = File.new("output/#{out_fname}html", 'w')
       out_f << in_lines.gsub(/(\{\{[\/a-zA-Z0-9_]+(?>\.[a-zA-Z0-9]{2,}){0,3}\}\})/) do |f_name_match|
         f_name = f_name_match[2..-3]
         ext = f_name[/(\.[a-zA-Z]+)/]
