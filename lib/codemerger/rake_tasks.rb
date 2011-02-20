@@ -6,7 +6,7 @@ namespace "codemerger" do
     FileUtils.mkdir_p 'output'
     in_files = Dir.glob("*.{markdown,html}")
     in_files.sort.each do |file|
-      in_lines = IO.readlines(file).to_s
+      in_lines = IO.readlines(file).join('')
       in_lines = Maruku.new(in_lines).to_html if file =~ /markdown$/
       out_fname = file[/^.*\./]
       out_f    = File.new("output/#{out_fname}html", 'w')
@@ -34,7 +34,7 @@ namespace "codemerger" do
         <<_EOF_
 <b>#{f_name}</b>
 <pre line="1" #{lang_str}>
-#{IO.readlines(f_name).to_s}
+#{IO.readlines(f_name).join('')}
 </pre>
 _EOF_
         end
