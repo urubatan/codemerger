@@ -10,7 +10,23 @@ Gem::Specification.new do |s|
   s.email       = ["rodrigo@urubatan.com.br"]
   s.homepage    = "http://www.urubatan.com.br"
   s.summary     = %q{Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach}
-  s.description = %q{Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach}
+  s.description = %q{This gem is used to help writing technical posts for wordpress.
+  The output is copied and pasted to a post into my wordpress blog, and the code gets colored using the plugin wp-syntax, and the output can be turned into PDF with the plugin wp-mpdf.
+
+Today this gem supports source files in the following languages:
+
+* Ruby (including Rakefile and Gemfile)
+* Java
+* YAML
+* HTML
+* XML
+* Scala
+* CSS
+* Javascript
+* Bash
+* Batch
+
+All other files are configured as "text".}
 
   s.rubyforge_project = "codemerger"
   s.add_dependency 'maruku'

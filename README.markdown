@@ -1,4 +1,4 @@
-This project is used to help writing technical posts for wordpress.
+This gem is used to help writing technical posts for wordpress.
 
 To use this GEM I usually create a new directory for the post or post group project, then I create a Gemfile like this:
 
@@ -44,9 +44,9 @@ Today this gem supports source files in the following languages:
 * Bash
 * Batch
 
-All other files are configures as "text".
+All other files are configured as "text".
 
-For the next steps I'm planningto write more automated tests, refactor the language support code out, today it is a switch statement to convert from a file extension to a name supported by wp-syntax/Geshi and add support for templates and direct conversion of the source samples to colored HTML.
+For the next steps I'm planning to write more automated tests, refactor the language support code out, today it is a switch statement to convert from a file extension to a name supported by wp-syntax/Geshi and add support for templates and direct conversion of the source samples to colored HTML.
 
 All these changes are simple, but besides the automated tests, I do not need any of the other right now, if you think they will be usefull for you, send me a message, file an enhancement request or fork, implement and send me a pull request.
 
