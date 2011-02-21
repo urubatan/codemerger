@@ -1,1 +1,0 @@
-This project is used to help writing technical posts for wordpress.
