@@ -2,32 +2,32 @@ This project is used to help writing technical posts for wordpress.
 
 To use this GEM I usually create a new directory for the post or post group project, then I create a Gemfile like this:
 
-  source "http://rubygems.org"
-  group :rake do
-    gem "codemerger", "0.1.0", :require => "codemerger/rake_tasks"
-  end
+        source "http://rubygems.org"
+        group :rake do
+          gem "codemerger", "0.1.0", :require => "codemerger/rake_tasks"
+        end
 
 After that I create a Rakefile like this:
 
-  require "rubygems"
-  require "bundler/setup"
-  Bundler.require :rake
+        require "rubygems"
+        require "bundler/setup"
+        Bundler.require :rake
 
 Then just start creating the post file in the root directory, the project supports .html or .markdown files for the posts.
 Inside this file, when I want to include a source sample, I create another file for the sample, and then I include it into the main post file with a code like this:
 
-  {{full/path/to/the/file.rb}}
+        {{full/path/to/the/file.rb}}
 
 When the post is ready I run teh rake task:
 
-  rake codemerger:merge
+        rake codemerger:merge
 
 After that, the file I was writting is processed, a new file is created into the output directory and the sample source files are included with a code like this:
 
-  <b>{{full/path/to/the/file.rb}}</b>
-  <pre line="1" lang="ruby">
-    ruby code
-  </pre>
+        <b>{{full/path/to/the/file.rb}}</b>
+        <pre line="1" lang="ruby">
+          ruby code
+        </pre>
 
 This snippet is then copied and pasted to a post into my wordpress blog, and the code gets colored using the plugin wp-syntax, and the output can be turned into PDF with the plugin wp-mpdf.
 
