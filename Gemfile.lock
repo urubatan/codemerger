@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    codemerger (0.0.1)
+    codemerger (0.2.2)
       maruku
 
 GEM
@@ -9,6 +9,9 @@ GEM
   specs:
     maruku (0.6.0)
       syntax (>= 1.0.0)
+    simplecov (0.4.2)
+      simplecov-html (~> 0.4.4)
+    simplecov-html (0.4.4)
     syntax (1.0.0)
 
 PLATFORMS
@@ -16,4 +19,4 @@ PLATFORMS
 
 DEPENDENCIES
   codemerger!
-  maruku
+  simplecov (>= 0.4.0)

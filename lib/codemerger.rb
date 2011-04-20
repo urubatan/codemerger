@@ -1,3 +1,2 @@
-module Codemerger
-  # Your code goes here...
-end
+require 'codemerger/version'
+require 'codemerger/merger'

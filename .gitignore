@@ -4,3 +4,5 @@ pkg/*
 .redcar/*
 *.swo
 *.swp
+output/*
+coverage/*

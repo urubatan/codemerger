@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Rodrigo Urubatan"]
   s.email       = ["rodrigo@urubatan.com.br"]
-  s.homepage    = "http://www.urubatan.com.br"
+  s.homepage    = "https://github.com/urubatan/codemerger"
   s.summary     = %q{Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach}
   s.description = %q{This gem is used to help writing technical posts for wordpress.
   The output is copied and pasted to a post into my wordpress blog, and the code gets colored using the plugin wp-syntax, and the output can be turned into PDF with the plugin wp-mpdf.
