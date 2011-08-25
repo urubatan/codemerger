@@ -29,7 +29,9 @@ Today this gem supports source files in the following languages:
 All other files are configured as "text".}
 
   s.rubyforge_project = "codemerger"
-  s.add_dependency 'maruku'
+  s.add_dependency 'redcarpet', '2.0.0b3'
+  s.add_dependency "albino", "1.3.3"
+  s.add_development_dependency 'simplecov'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
