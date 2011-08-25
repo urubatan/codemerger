@@ -5,7 +5,7 @@ describe Codemerger::Merger do
   def setup
     @merger = Codemerger::Merger.new 'test'
   end
-  it "should return the correct language string" do 
+  it "should return the correct language string" do
         @merger.get_language_str(".yml").must_equal "lang=\"yaml\""
         @merger.get_language_str(".xml").must_equal "lang=\"xml\""
         @merger.get_language_str(".html").must_equal "lang=\"xml\""
@@ -31,18 +31,21 @@ describe Codemerger::Merger do
     File.exists?("output/temp.txt").must_equal false
   end
   it "should return the correctly formated output for an embedded file" do
-    expected = %Q{<b>test/sample.rb</b>
-<pre line="1" lang="ruby">
-def sample
+    expected = %Q{
+      <b>test/sample.rb</b>
+      <pre line="1" lang="ruby">
+      def sample
   println "sample"
 end
-</pre>
-}
-    expected.must_equal @merger.build_merged_file_content('test/sample.rb')
+      </pre>
+      }
+    actual = @merger.build_merged_file_content('test/sample.rb')
+    expected.must_equal actual
   end
   it "should process HTML and Markdown files" do
     @merger.process_files
     File.exists?("output/test/test.html").must_equal true
     File.exists?("output/test/test2.html").must_equal true
+    puts File.new("output/test/test2.html").read
   end
 end
