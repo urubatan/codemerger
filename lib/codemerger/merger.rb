@@ -4,6 +4,14 @@ require 'albino'
 
 module Codemerger
   class HTMLwithAlbino < Redcarpet::Render::HTML
+    include Redcarpet::Render::SmartyPants
+    def code(code, language)
+      if language
+        Albino.colorize(code, language)
+      else
+        %Q{<pre><code>#{code}</code></pre>}
+      end
+    end
     def block_code(code, language)
       if language
         Albino.colorize(code, language)
@@ -29,8 +37,8 @@ module Codemerger
       when ".rb"; "ruby"
       when ".java"; "java"
       when ".scala"; "scala"
-      when ".erb"; "ruby"
-      when ".xsl"; "xml"
+      when ".erb"; "erb"
+      when ".xsl"; "xslt"
       when ".css"; "css"
       when ".js"; "javascript"
       when ".sh"; "bash"
