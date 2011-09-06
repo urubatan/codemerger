@@ -48,23 +48,33 @@ module Codemerger
       else; "text"
       end
     end
+    def sanitize(fname)
+      fname.gsub(/.*?:/, "")
+    end
+    def read_contents(fname)
+      if fname =~ /.+:/
+        `git cat-file blob #{fname}`
+      else
+        IO.readlines(f_name).join('')
+      end
+    end
     def build_html_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
       lang_str = get_language_str(ext)
       %Q{
-      <b>#{f_name}</b>
+      <b>#{sanitize(f_name)}</b>
       <pre line="1" lang="#{lang_str}">
-        #{IO.readlines(f_name).join('')}
+        #{read_contents(f_name)}
       </pre>
       }
     end
     def build_md_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
       lang_str = get_language_str(ext)
-      %Q{_#{f_name}_
+      %Q{_#{sanitize(f_name)}_
 
 ```#{lang_str}
-#{IO.readlines(f_name).join('')}
+#{read_contents(f_name)}
 ```
       }
     end
@@ -76,7 +86,7 @@ module Codemerger
         out_fname = file[/^.*\./]
         out_f    = File.new("output/#{out_fname}html", 'w')
         if is_markdown
-          in_lines.gsub!(/(\{\{[\/a-zA-Z0-9_]+(?>\.[a-zA-Z0-9]{2,}){0,3}\}\})/) do |f_name_match|
+          in_lines.gsub!(/(\{\{[\/a-zA-Z0-9:_]+(?>\.[a-z:_A-Z0-9]{2,}){0,3}\}\})/) do |f_name_match|
             f_name = f_name_match[2..-3]
             build_md_merged_file_content(f_name)
           end
