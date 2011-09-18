@@ -52,6 +52,8 @@ module Codemerger
       when ".erb"; "erb"
       when ".xsl"; "xslt"
       when ".css"; "css"
+      when ".scss"; "scss"
+      when ".coffee"; "coffee"
       when ".js"; "javascript"
       when ".sh"; "bash"
       when ".bat"; "batch"
@@ -67,7 +69,7 @@ module Codemerger
       if fname =~ /.+:/
         `git cat-file blob #{fname}`
       else
-        IO.readlines(f_name).join('')
+        IO.readlines(fname).join('')
       end
     end
     def build_html_merged_file_content(f_name)
