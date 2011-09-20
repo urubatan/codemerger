@@ -53,7 +53,7 @@ module Codemerger
       when ".xsl"; "xslt"
       when ".css"; "css"
       when ".scss"; "scss"
-      when ".coffee"; "coffee"
+      when ".coffee"; "coffeescript"
       when ".js"; "javascript"
       when ".sh"; "bash"
       when ".bat"; "batch"
