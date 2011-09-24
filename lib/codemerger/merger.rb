@@ -78,7 +78,7 @@ module Codemerger
       %Q{
       <b>#{sanitize(f_name)}</b>
       <pre line="1" lang="#{lang_str}">
-        #{read_contents(f_name)}
+      #{read_contents(f_name)}
       </pre>
       }
     end

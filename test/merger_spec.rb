@@ -6,21 +6,23 @@ describe Codemerger::Merger do
     @merger = Codemerger::Merger.new 'test'
   end
   it "should return the correct language string" do
-        @merger.get_language_str(".yml").must_equal "lang=\"yaml\""
-        @merger.get_language_str(".xml").must_equal "lang=\"xml\""
-        @merger.get_language_str(".html").must_equal "lang=\"xml\""
-        @merger.get_language_str(".rb").must_equal "lang=\"ruby\""
-        @merger.get_language_str(".java").must_equal "lang=\"java\""
-        @merger.get_language_str(".scala").must_equal "lang=\"scala\""
-        @merger.get_language_str(".erb").must_equal "lang=\"ruby\""
-        @merger.get_language_str(".xsl").must_equal "lang=\"xml\""
-        @merger.get_language_str(".css").must_equal "lang=\"css\""
-        @merger.get_language_str(".js").must_equal "lang=\"javascript\""
-        @merger.get_language_str(".sh").must_equal "lang=\"bash\""
-        @merger.get_language_str(".bat").must_equal "lang=\"batch\""
-        @merger.get_language_str(".xhtml").must_equal "lang=\"xml\""
-        @merger.get_language_str(nil).must_equal "lang=\"ruby\""
-        @merger.get_language_str("niaaa").must_equal  "lang=\"text\""
+        @merger.get_language_str(".yml").must_equal "yaml"
+        @merger.get_language_str(".xml").must_equal "xml"
+        @merger.get_language_str(".html").must_equal "xml"
+        @merger.get_language_str(".rb").must_equal "ruby"
+        @merger.get_language_str(".java").must_equal "java"
+        @merger.get_language_str(".scala").must_equal "scala"
+        @merger.get_language_str(".erb").must_equal "erb"
+        @merger.get_language_str(".xsl").must_equal "xslt"
+        @merger.get_language_str(".css").must_equal "css"
+        @merger.get_language_str(".js").must_equal "javascript"
+        @merger.get_language_str(".sh").must_equal "bash"
+        @merger.get_language_str(".bat").must_equal "batch"
+        @merger.get_language_str(".xhtml").must_equal "xml"
+        @merger.get_language_str(nil).must_equal "ruby"
+        @merger.get_language_str("niaaa").must_equal  "text"
+        @merger.get_language_str(".coffee").must_equal  "coffeescript"
+        @merger.get_language_str(".scss").must_equal  "scss"
   end
   it "should delete and re-create the output directory" do
     FileUtils.mkdir_p 'output'
@@ -39,7 +41,7 @@ describe Codemerger::Merger do
 end
       </pre>
       }
-    actual = @merger.build_merged_file_content('test/sample.rb')
+    actual = @merger.build_html_merged_file_content('test/sample.rb')
     expected.must_equal actual
   end
   it "should process HTML and Markdown files" do
