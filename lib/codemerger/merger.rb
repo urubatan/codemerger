@@ -7,7 +7,7 @@ module Codemerger
     include Redcarpet::Render::SmartyPants
     def code(code, language)
       if language
-        Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})
+        %Q{<pre>#{Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})}</pre>}
       else
         %Q{<pre><code>#{code}</code></pre>}
       end
@@ -25,7 +25,7 @@ module Codemerger
     end
     def block_code(code, language)
       if language
-        Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})
+        %Q{<pre>#{Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})}</pre>}
       else
         %Q{<pre><code>#{code}</code></pre>}
       end
