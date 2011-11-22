@@ -1,4 +1,12 @@
 source "http://rubygems.org"
 gem 'rake'
-# Specify your gem's dependencies in codemerger.gemspec
-gemspec
+gem 'redcarpet', '2.0.0b3'
+gem "albino", "1.3.3"
+
+group :development, :test do
+  gem 'simplecov', :require => false
+#  gem "rspec"
+  gem "bundler", "~> 1.0.0"
+  gem "jeweler", "~> 1.6.4"
+end
+

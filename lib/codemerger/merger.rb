@@ -6,17 +6,20 @@ module Codemerger
   class HTMLwithAlbino < Redcarpet::Render::HTML
     include Redcarpet::Render::SmartyPants
     def code(code, language)
-      if language
+       code = code.gsub(/  /, "\t")
+       code = code.gsub(/  /, "\t")
+       result = if language
         %Q{<pre>#{Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})}</pre>}
       else
         %Q{<pre><code>#{code}</code></pre>}
       end
+       result
     end
     def block_html(raw_html)
       @markdown ||= Redcarpet::Markdown.new(HTMLwithAlbino.new,
                                             :autolink => true, :space_after_headers => true, :superscript => true,
                                             :fenced_code_blocks => true, :tables => true, :no_intra_emphasis => true)
-      m,tag,attrs,content = *(raw_html.match(/<([a-z]+)(.*?)>(.*)<\/\1>/m))
+      m,tag,attrs,content = *(raw_html.match(/<(div)(.*?)>(.*)<\/div>/m))
       result = @markdown.render(content)
       %Q{<#{tag}#{attrs}>
          #{result}
@@ -24,11 +27,14 @@ module Codemerger
       }
     end
     def block_code(code, language)
-      if language
+       code = code.gsub(/  /, "\t")
+       code = code.gsub(/  /, "\t")
+       result = if language
         %Q{<pre>#{Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})}</pre>}
       else
         %Q{<pre><code>#{code}</code></pre>}
       end
+      result
     end
   end
   class Merger
