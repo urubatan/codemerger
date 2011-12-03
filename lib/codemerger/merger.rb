@@ -6,12 +6,11 @@ module Codemerger
   class HTMLwithAlbino < Redcarpet::Render::HTML
     include Redcarpet::Render::SmartyPants
     def code(code, language)
-       code = code.gsub(/  /, "\t")
-       code = code.gsub(/  /, "\t")
-       result = if language
-        %Q{<pre>#{Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})}</pre>}
+       code = code.gsub(/  /, "\t").gsub(/  /, "\t")
+       result = if false #language
+        %Q{<pre>#{Albino.new(code, language).colorize({O:"encoding=utf-8"})}</pre>}
       else
-        %Q{<pre><code>#{code}</code></pre>}
+        %Q{<pre><code>#{code.gsub('>','&gt;').gsub('<','&lt;').gsub("\n", "<br/>")}</code></pre>}
       end
        result
     end
@@ -27,12 +26,11 @@ module Codemerger
       }
     end
     def block_code(code, language)
-       code = code.gsub(/  /, "\t")
-       code = code.gsub(/  /, "\t")
-       result = if language
-        %Q{<pre>#{Albino.new(code, language).colorize({O:"linenos=table,encoding=utf-8"})}</pre>}
+       code = code.gsub(/  /, "\t").gsub(/  /, "\t")
+       result = if false #language
+        %Q{<pre>#{Albino.new(code, language).colorize({O:"encoding=utf-8"})}</pre>}
       else
-        %Q{<pre><code>#{code}</code></pre>}
+        %Q{<pre><code>#{code.gsub('>','&gt;').gsub('<','&lt;').gsub("\n", "<br/>")}</code></pre>}
       end
       result
     end
@@ -91,7 +89,7 @@ module Codemerger
     def build_md_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
       lang_str = get_language_str(ext)
-      %Q{_#{sanitize(f_name)}_
+      %Q{<span class="codetitle">#{sanitize(f_name)}</span>
 
 ```#{lang_str}
 #{read_contents(f_name)}
