@@ -5,14 +5,9 @@ require 'albino'
 module Codemerger
   class HTMLwithAlbino < Redcarpet::Render::HTML
     include Redcarpet::Render::SmartyPants
-    def code(code, language)
-       code = code.gsub(/  /, "\t").gsub(/  /, "\t")
-       result = if false #language
-        %Q{<pre>#{Albino.new(code, language).colorize({O:"encoding=utf-8"})}</pre>}
-      else
-        %Q{<pre><code>#{code.gsub('>','&gt;').gsub('<','&lt;').gsub("\n", "<br/>")}</code></pre>}
-      end
-       result
+    def codespan(code)
+      code = code.gsub("\ \ ", "\t")
+      %Q{<span class="codesnippet">#{code.gsub('>','&gt;').gsub('<','&lt;').gsub(/^(.*)$/, '<p>\1</p>')}</span>}
     end
     def block_html(raw_html)
       @markdown ||= Redcarpet::Markdown.new(HTMLwithAlbino.new,
@@ -26,12 +21,12 @@ module Codemerger
       }
     end
     def block_code(code, language)
-       code = code.gsub(/  /, "\t").gsub(/  /, "\t")
-       result = if false #language
-        %Q{<pre>#{Albino.new(code, language).colorize({O:"encoding=utf-8"})}</pre>}
-      else
-        %Q{<pre><code>#{code.gsub('>','&gt;').gsub('<','&lt;').gsub("\n", "<br/>")}</code></pre>}
-      end
+      code = code.gsub("\ \ ", "\t")
+      result = if false #language
+                 %Q{<pre>#{Albino.new(code, language).colorize({O:"encoding=utf-8"})}</pre>}
+               else
+                 %Q{<pre><code>#{code.gsub('>','&gt;').gsub('<','&lt;').gsub(/^(.*)$/, '<p>\1</p>')}</code></pre>}
+               end
       result
     end
   end
@@ -82,7 +77,7 @@ module Codemerger
       %Q{
       <b>#{sanitize(f_name)}</b>
       <pre line="1" lang="#{lang_str}">
-      #{read_contents(f_name)}
+        #{read_contents(f_name)}
       </pre>
       }
     end
@@ -97,7 +92,7 @@ module Codemerger
       }
     end
     def process_files
-      in_files = Dir.glob("#{@dir_name}/*.{markdown,md,html}")
+      in_files = Dir.glob("#{@dir_name}/**/*.{markdown,md,html}")
       in_files.sort.each do |file|
         in_lines = IO.readlines(file).join('')
         is_markdown = (file =~ /markdown$/) || (file =~ /md$/)
