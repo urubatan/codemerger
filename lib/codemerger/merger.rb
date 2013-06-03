@@ -138,7 +138,7 @@ module Codemerger
         FileUtils.mkdir_p out_d
         out_f    = File.new(out_f_name, 'w')
         if is_markdown
-          out_f << in_lines.gsub!(/(\{\{[\/a-zA-Z0-9:_]+(?>\.[a-z:_A-Z0-9]{2,}){0,3}\}\})/) do |f_name_match|
+          out_f << in_lines.gsub(/(\{\{[\/a-zA-Z0-9:_]+(?>\.[a-z:_A-Z0-9]{2,}){0,3}\}\})/) do |f_name_match|
             #puts "Merging #{f_name_match}"
             f_name = f_name_match[2..-3]
             build_md_merged_file_content(f_name)
