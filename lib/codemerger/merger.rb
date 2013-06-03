@@ -128,7 +128,7 @@ module Codemerger
       in_files = Dir.glob("#{@dir_name}/**/*.{markdown,md,html}")
       in_files.sort.each do |file|
         in_lines = IO.readlines(file).join('')
-        puts "#{file} - #{file.size}"
+        puts "#{file} - #{in_lines.size}"
         is_markdown = (file =~ /markdown$/) || (file =~ /md$/)
         out_fname = file[/^.*\./]
         out_ext = "html"
