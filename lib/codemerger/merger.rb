@@ -91,7 +91,7 @@ module Codemerger
     def build_md_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
       lang_str = get_language_str(ext)
-      %Q{_#{sanitize(f_name)}_
+      %Q{_#{sanitize(f_name)}_ {: .codeTitle}
 
 ```#{lang_str}
 #{read_contents(f_name)}
