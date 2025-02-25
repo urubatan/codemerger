@@ -1,2 +1,2 @@
-require 'codemerger/version'
-require 'codemerger/merger'
+require "codemerger/version"
+require "codemerger/merger"

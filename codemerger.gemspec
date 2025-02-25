@@ -5,20 +5,17 @@
 
 Gem::Specification.new do |s|
   s.name = "codemerger"
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Rodrigo Urubatan"]
-  s.date = "2011-10-31"
+  s.authors = [ "Rodrigo Urubatan" ]
+  s.date = "2025-02-25"
   s.description = "This gem is used to help writing technical posts for wordpress.\n  The output is copied and pasted to a post into my wordpress blog, and the code gets colored using the plugin wp-syntax, and the output can be turned into PDF with the plugin wp-mpdf.\n\nToday this gem supports source files in the following languages:\n\n* Ruby (including Rakefile and Gemfile)\n* Java\n* YAML\n* HTML\n* XML\n* Scala\n* CSS\n* Javascript\n* Bash\n* Batch\n\nAll other files are configured as \"text\"."
   s.email = "rodrigo@urubatan.com.br"
   s.extra_rdoc_files = [
     "README.markdown"
   ]
   s.files = [
-    ".Gemfile.swp",
-    ".codemerger.gemspec.swp",
-    ".rvmrc",
     "Gemfile",
     "Gemfile.lock",
     "README.markdown",
@@ -36,36 +33,34 @@ Gem::Specification.new do |s|
     "test/version_spec.rb"
   ]
   s.homepage = "https://github.com/urubatan/codemerger"
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.11"
+  s.licenses = [ "MIT" ]
+  s.require_paths = [ "lib" ]
   s.summary = "Used to create blog posts and tecnical articles that need code samples, the code samples will be taken from the actual source code file instead of a copy paste approach"
 
-  if s.respond_to? :specification_version then
+  if s.respond_to? :specification_version
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rake>, [">= 0"])
-      s.add_runtime_dependency(%q<redcarpet>, ["= 2.0.0b3"])
-      s.add_runtime_dependency(%q<albino>, ["= 1.3.3"])
-      s.add_development_dependency(%q<simplecov>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new("1.2.0")
+      s.add_runtime_dependency("albino", [ "= 1.3.3" ])
+      s.add_runtime_dependency("rake", [ ">= 0" ])
+      s.add_runtime_dependency("redcarpet", [ "= 2.0.0b3" ])
+      s.add_development_dependency("bundler", [ "~> 1.0.0" ])
+      s.add_dependency("albino", [ "= 1.3.3" ])
+      s.add_dependency("albino", [ "= 1.3.3" ])
     else
-      s.add_dependency(%q<rake>, [">= 0"])
-      s.add_dependency(%q<redcarpet>, ["= 2.0.0b3"])
-      s.add_dependency(%q<albino>, ["= 1.3.3"])
-      s.add_dependency(%q<simplecov>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
+      s.add_dependency("bundler", [ "~> 1.0.0" ])
+      s.add_dependency("bundler", [ "~> 1.0.0" ])
+      s.add_dependency("rake", [ ">= 0" ])
+      s.add_development_dependency("jeweler", [ "~> 1.6.4" ])
+      s.add_dependency("jeweler", [ "~> 1.6.4" ])
+      s.add_dependency("jeweler", [ "~> 1.6.4" ])
     end
   else
-    s.add_dependency(%q<rake>, [">= 0"])
-    s.add_dependency(%q<redcarpet>, ["= 2.0.0b3"])
-    s.add_dependency(%q<albino>, ["= 1.3.3"])
-    s.add_dependency(%q<simplecov>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
+    s.add_dependency("rake", [ ">= 0" ])
+    s.add_dependency("redcarpet", [ "= 2.0.0b3" ])
+    s.add_dependency("redcarpet", [ "= 2.0.0b3" ])
+    s.add_dependency("simplecov", [ ">= 0" ])
+    s.add_dependency("simplecov", [ ">= 0" ])
+    s.add_development_dependency("simplecov", [ ">= 0" ])
   end
 end
-

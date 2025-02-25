@@ -1,5 +1,5 @@
-require 'minitest/autorun'
-require 'codemerger/version'
+require "minitest/autorun"
+require "codemerger/version"
 
 describe Codemerger do
   it "should return the correct version number" do
