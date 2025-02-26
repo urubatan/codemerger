@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% if @converter.root.options[:encoding] %>
+      <meta http-equiv="Content-type" content="text/html;charset=<%= @converter.root.options[:encoding] %>">
+    <% end %>
+    <%
+extend ::Kramdown::Utils::Html
+title = ''
+h = @converter.root.children.find {|c| c.type == :header}
+if h
+  collector = lambda {|c| c.children.collect {|cc| cc.type == :text ? escape_html(cc.value, :text) : collector.call(cc)}.join('')}
+  title = collector.call(h)
+end
+%>
+    <title><%= title %></title>
+    <meta name="generator" content="kramdown <%= ::Kramdown::VERSION %>" />
+    <style>
+      p:has(.code-title) {
+        margin-bottom: 0;
+        .code-title {
+          font-weight: bold;
+        }
+      }
+
+      .highlighter-rouge {
+        border: 1px solid black;
+        display: block;
+        width: fit-content;
+        margin: 1em 0;
+
+        pre.highlight {
+          margin: 0;
+        }
+
+      }
+
+      p:has(.code-title)+.highlighter-rouge {
+        margin-top: 0;
+      }
+
+      <%= Rouge::Themes::Github.render(scope: '.highlight') %>
+    </style>
+  </head>
+  <body>
+    <%= @body %>
+  </body>
+</html>

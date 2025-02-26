@@ -1,9 +1,11 @@
-{{test/sample.rb}}
+{{master:test/sample.rb}}
 
-````ruby
+_ruby name_{:.code-title}
+
+~~~ ruby
 def a(b)
   puts b
 end
-````
+~~~
 
 Bloco colorido?

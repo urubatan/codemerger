@@ -44,6 +44,7 @@ GEM
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
     mime-types (2.99.3)
+    minitest (5.25.4)
     multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -130,6 +131,7 @@ DEPENDENCIES
   bundler
   jeweler
   kramdown
+  minitest
   rake
   rouge
   rubocop

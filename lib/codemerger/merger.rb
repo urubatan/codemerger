@@ -1,46 +1,8 @@
 require "fileutils"
-require "redcarpet"
-require "albino"
+require "kramdown"
 
 module Codemerger
-  class HTMLwithAlbino < Redcarpet::Render::HTML
-    include Redcarpet::Render::SmartyPants
-    def code(code, language)
-      code = code.gsub(/  /, "\t")
-      code = code.gsub(/  /, "\t")
-      if language
-        %(<pre>#{Albino.new(code, language).colorize({ O: 'linenos=table,encoding=utf-8' })}</pre>)
-      else
-        %(<pre><code>#{code}</code></pre>)
-      end
-    end
-
-    def block_html(raw_html)
-      @markdown ||= Redcarpet::Markdown.new(HTMLwithAlbino.new,
-                                            autolink: true, space_after_headers: true, superscript: true,
-                                            fenced_code_blocks: true, tables: true, no_intra_emphasis: true)
-      m, tag, attrs, content = *raw_html.match(%r{<(div)(.*?)>(.*)</div>}m)
-      result = @markdown.render(content)
-      %(<#{tag}#{attrs}>
-         #{result}
-        </#{tag}>
-      )
-    end
-
-    def block_code(code, language)
-      code = code.gsub(/  /, "\t")
-      code = code.gsub(/  /, "\t")
-      if language
-        %(<pre>#{Albino.new(code, language).colorize({ O: 'linenos=table,encoding=utf-8' })}</pre>)
-      else
-        %(<pre><code>#{code}</code></pre>)
-      end
-    end
-  end
-
   class Merger
-    attr_reader :markdown
-
     def initialize(dir_name)
       @dir_name = dir_name
     end
@@ -99,11 +61,11 @@ module Codemerger
     def build_md_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
       lang_str = get_language_str(ext)
-      %(_#{sanitize(f_name)}_ {: .codeTitle}
+      %(_#{sanitize(f_name)}_{:.code-title}
 
-```#{lang_str}
+~~~ #{lang_str}
 #{read_contents(f_name)}
-```
+~~~
       )
     end
 
@@ -116,58 +78,29 @@ module Codemerger
         out_f_name = "output/#{out_fname}html"
         out_d = File.dirname(out_f_name)
         FileUtils.mkdir_p out_d
-        out_f = File.new(out_f_name, "w")
-        if is_markdown
-          in_lines.gsub!(%r{(\{\{[/a-zA-Z0-9:_]+(?>\.[a-z:_A-Z0-9]{2,}){0,3}\}\})}) do |f_name_match|
-            puts "Merging #{f_name_match}"
-            f_name = f_name_match[2..-3]
-            build_md_merged_file_content(f_name)
-          end
-          out_f << processMarkdown(in_lines)
-        else
-          out_f << in_lines.gsub(%r{(\{\{[/a-zA-Z0-9_]+(?>\.[a-zA-Z0-9]{2,}){0,3}\}\})}) do |f_name_match|
-            puts "Merging #{f_name_match}"
-            f_name = f_name_match[2..-3]
-            build_html_merged_file_content(f_name)
+        File.open(out_f_name, "w:utf-8") do |out_f|
+          if is_markdown
+            in_lines.gsub!(%r{(\{\{[/a-zA-Z0-9:_]+(?>\.[a-z:_A-Z0-9]{2,}){0,3}\}\})}) do |f_name_match|
+              puts "Merging #{f_name_match}"
+              f_name = f_name_match[2..-3]
+              build_md_merged_file_content(f_name)
+            end
+            out_f << process_markdown(in_lines)
+          else
+            out_f << in_lines.gsub(%r{(\{\{[/a-zA-Z0-9_]+(?>\.[a-zA-Z0-9]{2,}){0,3}\}\})}) do |f_name_match|
+              puts "Merging #{f_name_match}"
+              f_name = f_name_match[2..-3]
+              build_html_merged_file_content(f_name)
+            end
           end
         end
       end
     end
 
-    def only_process_files(outdir = "output")
-      in_files = Dir.glob("#{@dir_name}/**/*.{markdown,md,html}")
-      in_files.sort.each do |file|
-        in_lines = IO.readlines(file).join("")
-        puts "#{file} - #{in_lines.size}"
-        is_markdown = (file =~ /markdown$/) || (file =~ /md$/)
-        out_fname = file[/^.*\./]
-        out_ext = "html"
-        out_ext = "markdown" if is_markdown
-        out_f_name = "#{outdir}/#{out_fname}#{out_ext}"
-        out_d = File.dirname(out_f_name)
-        FileUtils.mkdir_p out_d
-        out_f = File.new(out_f_name, "w")
-        out_f << if is_markdown
-                   in_lines.gsub(%r{(\{\{[/a-zA-Z0-9:_]+(?>\.[a-z:_A-Z0-9]{2,}){0,3}\}\})}) do |f_name_match|
-                     # puts "Merging #{f_name_match}"
-                     f_name = f_name_match[2..-3]
-                     build_md_merged_file_content(f_name)
-                   end
-                 else
-                   in_lines.gsub(%r{(\{\{[/a-zA-Z0-9_]+(?>\.[a-zA-Z0-9]{2,}){0,3}\}\})}) do |f_name_match|
-                     puts "Merging #{f_name_match}"
-                     f_name = f_name_match[2..-3]
-                     build_html_merged_file_content(f_name)
-                   end
-                 end
-      end
-    end
-
-    def processMarkdown(text)
-      @markdown ||= Redcarpet::Markdown.new(HTMLwithAlbino.new,
-                                            autolink: true, space_after_headers: true, superscript: true,
-                                            fenced_code_blocks: true, tables: true, no_intra_emphasis: true)
-      @markdown.render(text)
+    def process_markdown(text)
+      template = "string://#{File.read(File.join(File.dirname(File.expand_path(__FILE__)),'document_with_css.html.erb'))}"
+      doc = Kramdown::Document.new(text, syntax_highlighter: :rouge, header_links: true, auto_ids: true, template: template)
+      doc.to_html
     end
   end
 end

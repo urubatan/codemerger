@@ -6,8 +6,4 @@ namespace "codemerger" do
     @merger.clean_dirs
     @merger.process_files
   end
-  task :merge2 do
-    @merger = Codemerger::Merger.new "."
-    @merger.process_files2
-  end
 end

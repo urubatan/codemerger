@@ -1,7 +1,5 @@
 require "rubygems"
 require "bundler"
-require "simplecov"
-SimpleCov.start
 require "rake/testtask"
 begin
   Bundler.setup(:default, :development)

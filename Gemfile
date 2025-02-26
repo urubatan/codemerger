@@ -8,5 +8,6 @@ group :development, :test do
   #  gem "rspec"
   gem "bundler"
   gem "jeweler"
+  gem "minitest"
   gem "rubocop"
 end
