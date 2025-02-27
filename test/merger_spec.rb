@@ -1,4 +1,4 @@
-require_relative 'test_helper'
+require_relative "test_helper"
 require "codemerger"
 describe Codemerger::Merger do
   def setup
@@ -37,9 +37,13 @@ describe Codemerger::Merger do
     _(expected).must_equal actual
   end
   it "should process HTML and Markdown files" do
-    @merger.process_files
+    @merger.process_files(html: true)
     _(File.exist?("output/test/test.html")).must_equal true
     _(File.exist?("output/test/test2.html")).must_equal true
-    puts File.new("output/test/test2.html").read
+  end
+  it "should process only Markdown files" do
+    @merger.clean_dirs
+    @merger.process_files
+    _(File.exist?("output/test/test2.html")).must_equal true
   end
 end

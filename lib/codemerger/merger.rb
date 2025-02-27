@@ -1,5 +1,6 @@
 require "fileutils"
 require "kramdown"
+require "rouge"
 
 module Codemerger
   class Merger
@@ -60,17 +61,29 @@ module Codemerger
 
     def build_md_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
-      lang_str = get_language_str(ext)
-      %(_#{sanitize(f_name)}_{:.code-title}
+      if ext =~ /^(md|markdown)$/
+        lang_str = get_language_str(ext)
+        %(_#{sanitize(f_name)}_{:.code-title}
 
 ~~~ #{lang_str}
 #{read_contents(f_name)}
 ~~~
       )
+      else
+        %(
+
+#{read_contents(f_name)}
+
+        )
+      end
     end
 
-    def process_files
-      in_files = Dir.glob("#{@dir_name}/**/*.{markdown,md,html}")
+    def process_files(html: false)
+      in_files = if html
+                   Dir.glob("#{@dir_name}/**/*.{markdown,md,html}")
+                 else
+                   Dir.glob("#{@dir_name}/**/*.{markdown,md}")
+                 end
       in_files.sort.each do |file|
         in_lines = IO.readlines(file).join("")
         is_markdown = (file =~ /markdown$/) || (file =~ /md$/)
@@ -98,7 +111,7 @@ module Codemerger
     end
 
     def process_markdown(text)
-      template = "string://#{File.read(File.join(File.dirname(File.expand_path(__FILE__)),'document_with_css.html.erb'))}"
+      template = "string://#{File.read(File.join(File.dirname(File.expand_path(__FILE__)), 'document_with_css.html.erb'))}"
       doc = Kramdown::Document.new(text, syntax_highlighter: :rouge, header_links: true, auto_ids: true, template: template)
       doc.to_html
     end

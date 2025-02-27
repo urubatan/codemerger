@@ -16,6 +16,56 @@ end
     <title><%= title %></title>
     <meta name="generator" content="kramdown <%= ::Kramdown::VERSION %>" />
     <style>
+
+body {
+  font-family: Palatino, serif;
+  font-size: 14pt;
+  line-height: 1.6;
+  margin: 0 30px;
+  /*max-width: 65ch;*/
+}
+
+header {
+  text-align: center;
+  break-after: page;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+h2 {
+  break-before: page;
+}
+
+p {
+  margin: 0;
+}
+
+/* Add text indents to every paragraph except the first. This includes other
+elements, so there will be no text indent after let's say an image or a list. 
+p + p {
+  text-indent: 2ch;
+}
+*/
+hr {
+  border: none;
+  margin-bottom: 2em;
+}
+
+hr[data-break="hard"] {
+  margin: 1em auto;
+  font-size: 1.25em;
+  color: currentColor;
+  text-align: center;
+}
+
+hr[data-break="hard"]::before {
+  content: "* * *";
+}
+
+
       p:has(.code-title) {
         margin-bottom: 0;
         .code-title {

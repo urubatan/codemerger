@@ -4,7 +4,7 @@ To use this GEM I usually create a new directory for the post or post group proj
 
         source "http://rubygems.org"
         group :rake do
-          gem "codemerger", "0.5.0", :require => "codemerger/rake_tasks"
+          gem "codemerger", "1.0.0", :require => "codemerger/rake_tasks"
         end
 
 After that I create a Rakefile like this:
