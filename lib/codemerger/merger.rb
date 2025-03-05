@@ -54,7 +54,7 @@ module Codemerger
       %(
       <b>#{sanitize(f_name)}</b>
       <pre line="1" lang="#{lang_str}">
-      #{read_contents(f_name)}
+      #{read_contents(f_name)&.strip}
       </pre>
       )
     end
@@ -66,7 +66,7 @@ module Codemerger
         %(_#{sanitize(f_name)}_{:.code-title}
 
 ~~~ #{lang_str}
-#{read_contents(f_name)}
+#{read_contents(f_name)&.strip}
 ~~~
       )
       else
