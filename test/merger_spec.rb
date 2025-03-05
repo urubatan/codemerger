@@ -1,5 +1,5 @@
 require_relative "test_helper"
-require "codemerger"
+require_relative "../lib/codemerger"
 describe Codemerger::Merger do
   def setup
     @merger = Codemerger::Merger.new "test"

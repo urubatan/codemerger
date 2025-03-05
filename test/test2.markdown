@@ -8,4 +8,8 @@ def a(b)
 end
 ~~~
 
-Bloco colorido?
+Was the block colored?
+
+{{test/test3.markdown}}
+
+And the text above was parsed?

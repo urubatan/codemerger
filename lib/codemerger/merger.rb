@@ -61,7 +61,7 @@ module Codemerger
 
     def build_md_merged_file_content(f_name)
       ext = f_name[/(\.[a-zA-Z]+)/]
-      if ext !~ /^(md|markdown)$/
+      if ext !~ /^\.(md|markdown)$/
         lang_str = get_language_str(ext)
         %(_#{sanitize(f_name)}_{:.code-title}
 
